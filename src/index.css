@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+@theme {
+  --font-heading: 'Montserrat', sans-serif;
+  --font-sans: 'Inter', sans-serif;
+  --color-cold-ice: #BECFFF;
+  --color-cold-lavender: #A296BC;
+  --color-cold-dark: #000000;
+  --color-cold-surface: #0C0B0E;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #000000;
+  background-image: 
+    radial-gradient(circle at 5% 15%, rgba(190, 207, 255, 0.06) 0%, transparent 45%),
+    radial-gradient(circle at 95% 45%, rgba(162, 150, 188, 0.07) 0%, transparent 40%),
+    radial-gradient(circle at 50% 90%, rgba(190, 207, 255, 0.04) 0%, transparent 50%);
+  background-attachment: fixed;
+  color: #F3F4F6;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.glass-panel {
+  background: rgba(14, 13, 18, 0.72);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(190, 207, 255, 0.12);
+  box-shadow: 0 12px 35px -5px rgba(0, 0, 0, 0.8), 0 0 20px -5px rgba(190, 207, 255, 0.05);
+}
+
+.glass-panel-hover {
+  transition: all 0.25s ease-in-out;
+}
+
+.glass-panel-hover:hover {
+  border-color: rgba(190, 207, 255, 0.28);
+  box-shadow: 0 16px 40px -5px rgba(0, 0, 0, 0.9), 0 0 25px 0 rgba(190, 207, 255, 0.12);
+}
+
+.ice-glow {
+  box-shadow: 0 0 20px rgba(190, 207, 255, 0.25);
+}
+
+.lavender-glow {
+  box-shadow: 0 0 20px rgba(162, 150, 188, 0.25);
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(12, 11, 14, 0.5);
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(162, 150, 188, 0.25);
+  border-radius: 9999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(190, 207, 255, 0.45);
+}

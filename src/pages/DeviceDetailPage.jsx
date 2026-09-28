@@ -1,0 +1,150 @@
+import {
+  ArrowLeft,
+  Radio,
+  Sliders,
+  RefreshCw,
+  Server,
+  ChevronLeft,
+  ChevronRight,
+  AlertTriangle,
+  CheckCircle2,
+  Activity,
+} from 'lucide-react'
+import { TemperatureSection } from '../components/dashboard/TemperatureSection'
+import { ActuatorsPanel } from '../components/dashboard/ActuatorsPanel'
+import { ProtectionAndDiagnostics } from '../components/dashboard/ProtectionAndDiagnostics'
+import { TelemetryHistoryTable } from '../components/dashboard/TelemetryHistoryTable'
+import { Button } from '../components/ui/Button'
+import { Badge } from '../components/ui/Badge'
+import { Card } from '../components/ui/Card'
+
+export function DeviceDetailPage({
+  deviceId,
+  devices = [],
+  latestData,
+  history = [],
+  onRefresh,
+  onOpenSimulator,
+  monitoringStatus = 'normal',
+  pollingCadenceLabel = '30s',
+}) {
+  const currentDevice = devices.find((d) => d.deviceId === deviceId)
+  const isOnline = currentDevice?.status === 'online'
+
+  const deviceIds =
+    devices.length > 0 ? devices.map((d) => d.deviceId) : ['CT-001']
+  const currentIdx = deviceIds.indexOf(deviceId)
+  const safeIdx = currentIdx >= 0 ? currentIdx : 0
+  const prevDeviceId =
+    deviceIds[(safeIdx - 1 + deviceIds.length) % deviceIds.length]
+  const nextDeviceId = deviceIds[(safeIdx + 1) % deviceIds.length]
+
+  const isAlert = monitoringStatus === 'alerta'
+  const isRecovery = monitoringStatus === 'recuperacion'
+
+  if (!deviceId) {
+    return (
+      <Card className="py-12 text-center">
+        <div className="flex flex-col items-center justify-center gap-3">
+          <Server className="w-8 h-8 text-[#A296BC]" />
+          <h3 className="font-heading font-bold text-base text-[#F3F4F6]">
+            No se especificó un dispositivo
+          </h3>
+          <p className="text-xs text-[#9CA3AF]">
+            Regresa a la pantalla principal para seleccionar un equipo de la flota.
+          </p>
+          <a
+            href="/"
+            className="inline-flex items-center gap-2 py-2 px-4 rounded-lg bg-[#BECFFF] text-black font-semibold text-xs"
+          >
+            <ArrowLeft className="w-3.5 h-3.5" />
+            Volver a la Flota
+          </a>
+        </div>
+      </Card>
+    )
+  }
+
+  return (
+    <div className="space-y-6">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-3 border-b border-white/10">
+        <div className="flex items-center gap-3 flex-wrap">
+          <a
+            href="/"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-white/10 text-xs text-[#9CA3AF] hover:text-[#BECFFF] hover:border-[#BECFFF]/40 transition-colors"
+          >
+            <ArrowLeft className="w-3.5 h-3.5" />
+            <span>Flota</span>
+          </a>
+
+          <div>
+            <div className="flex items-center gap-2 flex-wrap">
+              <Radio className="w-4 h-4 text-[#BECFFF] animate-pulse" />
+              <h2 className="font-heading font-bold text-xl text-[#F3F4F6]">
+                {deviceId}
+              </h2>
+              <div className="flex items-center gap-1 bg-black/40 px-1 py-0.5 rounded-lg border border-white/10">
+                <a
+                  href={`?device=${encodeURIComponent(prevDeviceId)}`}
+                  className="p-1 rounded hover:text-[#BECFFF] hover:bg-white/10 text-[#9CA3AF] transition-colors"
+                  title={`Anterior: ${prevDeviceId}`}
+                >
+                  <ChevronLeft className="w-3.5 h-3.5" />
+                </a>
+                <a
+                  href={`?device=${encodeURIComponent(nextDeviceId)}`}
+                  className="p-1 rounded hover:text-[#BECFFF] hover:bg-white/10 text-[#9CA3AF] transition-colors"
+                  title={`Siguiente: ${nextDeviceId}`}
+                >
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </a>
+              </div>
+
+              <Badge variant={isOnline ? 'success' : 'default'} className="text-[10px]">
+                {isOnline ? 'CONECTADO' : 'OFFLINE'}
+              </Badge>
+
+              <Badge
+                variant={isAlert ? 'danger' : isRecovery ? 'success' : 'default'}
+                className="text-[10px] font-mono tracking-tight"
+              >
+                {isAlert ? (
+                  <AlertTriangle className="w-3 h-3 text-rose-400" />
+                ) : isRecovery ? (
+                  <CheckCircle2 className="w-3 h-3 text-emerald-400" />
+                ) : (
+                  <Activity className="w-3 h-3 text-[#BECFFF]" />
+                )}
+                {isAlert
+                  ? `ESTADO DE ALERTA (${pollingCadenceLabel})`
+                  : isRecovery
+                  ? `RECUPERACIÓN RECIENTE (${pollingCadenceLabel})`
+                  : `ESTADO NORMAL (${pollingCadenceLabel})`}
+              </Badge>
+            </div>
+            <span className="text-xs text-[#A296BC] font-mono">
+              Telemetría de Precisión en Vivo · Cadencia Adaptativa
+            </span>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <Button variant="outline" size="sm" onClick={onRefresh}>
+            <RefreshCw className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">Actualizar</span>
+          </Button>
+
+          <Button variant="secondary" size="sm" onClick={onOpenSimulator}>
+            <Sliders className="w-3.5 h-3.5" />
+            <span>Simular en {deviceId}</span>
+          </Button>
+        </div>
+      </div>
+
+      <TemperatureSection data={latestData} />
+      <ActuatorsPanel data={latestData} />
+      <ProtectionAndDiagnostics data={latestData} />
+      <TelemetryHistoryTable history={history} />
+    </div>
+  )
+}
