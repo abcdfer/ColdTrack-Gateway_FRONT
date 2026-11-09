@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import {
   checkHealth,
   fetchDevices,
+  fetchAlerts,
   fetchTelemetry,
   fetchLatestTelemetry,
   sendTelemetry,
@@ -11,6 +12,8 @@ const SLOW_INTERVAL = 30000
 const FAST_INTERVAL = 5000
 
 function isDeviceInAlert(record, deviceEntry) {
+  const state = record?.state || deviceEntry?.state
+  if (state) return state === 'alert'
   const diag = record?.diagnostico || deviceEntry?.diagnostico
   if (diag && diag !== 'SIN_FALLAS') {
     return true
@@ -46,6 +49,7 @@ export function useTelemetry(initialDeviceId = null) {
   const [latestData, setLatestData] = useState(null)
   const [latestDataMap, setLatestDataMap] = useState({})
   const [history, setHistory] = useState([])
+  const [alerts, setAlerts] = useState([])
   const [isAutoRefresh, setIsAutoRefresh] = useState(true)
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -115,19 +119,19 @@ export function useTelemetry(initialDeviceId = null) {
         setLatestData(currentLatest)
       }
 
-      const historyRes = await fetchTelemetry(activeDeviceId, 30)
+      const [historyRes, alertsRes] = await Promise.all([
+        fetchTelemetry(activeDeviceId, 30),
+        activeDeviceId ? fetchAlerts(activeDeviceId) : Promise.resolve({ items: [] }),
+      ])
       if (isMountedRef.current) {
         setHistory(historyRes.items || [])
+        setAlerts(alertsRes.items || [])
         setLastUpdated(new Date())
       }
 
-      let hasAlert = false
-      if (targetId) {
-        const targetDev = devList.find((d) => d.deviceId === targetId)
-        hasAlert = isDeviceInAlert(currentLatest, targetDev)
-      } else {
-        hasAlert = devList.some((d) => isDeviceInAlert(dataMap[d.deviceId], d))
-      }
+      const hasAlert = activeDeviceId
+        ? isDeviceInAlert(currentLatest, devList.find((d) => d.deviceId === activeDeviceId))
+        : devList.some((d) => isDeviceInAlert(dataMap[d.deviceId], d))
 
       let nextInterval = SLOW_INTERVAL
 
@@ -214,6 +218,7 @@ export function useTelemetry(initialDeviceId = null) {
     latestData,
     latestDataMap,
     history,
+    alerts,
     isAutoRefresh,
     setIsAutoRefresh,
     isLoading,

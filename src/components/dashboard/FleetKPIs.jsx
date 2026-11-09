@@ -6,10 +6,7 @@ export function FleetKPIs({ devices = [], latestDataMap = {} }) {
   const online = devices.filter((d) => d.status === 'online').length
   const alerts = devices.filter((d) => {
     const data = latestDataMap[d.deviceId]
-    return (
-      (data?.diagnostico && data.diagnostico !== 'SIN_FALLAS') ||
-      (d.diagnostico && d.diagnostico !== 'SIN_FALLAS')
-    )
+    return (data?.state || d.state) === 'alert'
   }).length
   const compliant = Math.max(0, total - alerts)
   const complianceRate = total > 0 ? Math.round((compliant / total) * 100) : 100

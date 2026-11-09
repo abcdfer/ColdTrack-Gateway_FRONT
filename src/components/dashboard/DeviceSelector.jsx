@@ -42,7 +42,7 @@ export function DeviceSelector({
       {devices.map((device) => {
         const isSelected = device.deviceId === selectedDeviceId
         const isOnline = device.status === 'online'
-        const hasWarning = device.diagnostico && device.diagnostico !== 'SIN_FALLAS'
+        const hasWarning = device.state === 'alert'
 
         return (
           <button

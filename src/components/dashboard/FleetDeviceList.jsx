@@ -73,7 +73,7 @@ export function FleetDeviceList({
               const diagnostico =
                 latest?.diagnostico || device.diagnostico || 'SIN_FALLAS'
               const estado = latest?.estado || device.estado || 'NORMAL'
-              const hasFault = diagnostico !== 'SIN_FALLAS'
+              const hasFault = (latest?.state || device.state) === 'alert'
               const tempInterior = latest?.tempInterior
               const uptimeMs = latest?.uptimeMs
 

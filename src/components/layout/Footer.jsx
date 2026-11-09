@@ -32,7 +32,7 @@ export function Footer({ onOpenInfo }) {
             <div className="flex items-center gap-4 pt-1 text-[11px]">
               <span className="inline-flex items-center gap-1.5 text-emerald-400 font-medium">
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-                Basic Auth Seguro
+                Acceso con sesión
               </span>
               <span className="inline-flex items-center gap-1.5 text-[#BECFFF] font-medium">
                 <Activity className="w-3.5 h-3.5 text-[#BECFFF] animate-pulse" />

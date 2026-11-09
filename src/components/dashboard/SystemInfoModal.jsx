@@ -1,20 +1,8 @@
-import { useState } from 'react'
-import { Server, Compass, Eye, Network, Check, Save } from 'lucide-react'
+import { Server, Compass, Eye, Network } from 'lucide-react'
 import { Modal } from '../ui/Modal'
-import { Button } from '../ui/Button'
-import { getApiBaseUrl, setApiBaseUrl } from '../../services/apiService'
+import { getApiBaseUrl } from '../../services/apiService'
 
-export function SystemInfoModal({ isOpen, onClose, healthInfo, onRefresh }) {
-  const [apiUrl, setApiUrl] = useState(getApiBaseUrl())
-  const [saved, setSaved] = useState(false)
-
-  const handleSaveUrl = () => {
-    setApiBaseUrl(apiUrl)
-    setSaved(true)
-    setTimeout(() => setSaved(false), 2000)
-    onRefresh()
-  }
-
+export function SystemInfoModal({ isOpen, onClose, healthInfo }) {
   return (
     <Modal isOpen={isOpen} onClose={onClose} title="Sistema y Arquitectura ColdTrack">
       <div className="space-y-6 text-xs text-[#9CA3AF]">
@@ -67,7 +55,7 @@ export function SystemInfoModal({ isOpen, onClose, healthInfo, onRefresh }) {
             </div>
             <div className="p-2.5 rounded-lg bg-[#BECFFF]/10 border border-[#BECFFF]/30">
               <span className="block text-[10px] text-[#BECFFF] uppercase font-bold">4. API & UI</span>
-              <span className="font-medium text-[#BECFFF] block mt-1">ColdTrack API (5000)</span>
+              <span className="font-medium text-[#BECFFF] block mt-1">ColdTrack API</span>
               <span className="text-[10px] text-[#9CA3AF]">Persistencia SQLite</span>
             </div>
           </div>
@@ -85,19 +73,7 @@ export function SystemInfoModal({ isOpen, onClose, healthInfo, onRefresh }) {
               </span>
             )}
           </div>
-          <div className="flex gap-2">
-            <input
-              type="text"
-              value={apiUrl}
-              onChange={(e) => setApiUrl(e.target.value)}
-              placeholder="http://127.0.0.1:5000"
-              className="flex-1 bg-zinc-950 border border-white/10 rounded-lg px-3 py-1.5 text-xs text-[#F3F4F6] font-mono focus:border-[#BECFFF]/50 outline-none"
-            />
-            <Button size="sm" variant="primary" onClick={handleSaveUrl}>
-              {saved ? <Check className="w-3.5 h-3.5" /> : <Save className="w-3.5 h-3.5" />}
-              {saved ? 'Guardado' : 'Guardar'}
-            </Button>
-          </div>
+          <p className="break-all font-mono">{getApiBaseUrl()}</p>
         </div>
       </div>
     </Modal>

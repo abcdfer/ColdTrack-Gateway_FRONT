@@ -23,6 +23,7 @@ export function DeviceDetailPage({
   devices = [],
   latestData,
   history = [],
+  alerts = [],
   onRefresh,
   onOpenSimulator,
   monitoringStatus = 'normal',
@@ -123,7 +124,7 @@ export function DeviceDetailPage({
               </Badge>
             </div>
             <span className="text-xs text-[#A296BC] font-mono">
-              Telemetría de Precisión en Vivo · Cadencia Adaptativa
+              {latestData?.source === 'simulator' ? 'Origen: simulador web' : 'Origen: gateway de telemetría'}
             </span>
           </div>
         </div>
@@ -136,7 +137,7 @@ export function DeviceDetailPage({
 
           <Button variant="secondary" size="sm" onClick={onOpenSimulator}>
             <Sliders className="w-3.5 h-3.5" />
-            <span>Simular en {deviceId}</span>
+            <span>Abrir simulador</span>
           </Button>
         </div>
       </div>
@@ -144,6 +145,22 @@ export function DeviceDetailPage({
       <TemperatureSection data={latestData} />
       <ActuatorsPanel data={latestData} />
       <ProtectionAndDiagnostics data={latestData} />
+      <Card className="space-y-3 p-4">
+        <h3 className="font-heading text-sm font-semibold">Alertas del equipo</h3>
+        {alerts.length === 0 ? <p className="text-xs text-zinc-400">Sin alertas registradas.</p> : (
+          <ul className="divide-y divide-white/10">
+            {alerts.map((alert) => (
+              <li key={alert.id} className="flex flex-wrap items-center gap-2 py-2 text-xs">
+                <Badge variant={alert.active ? 'danger' : 'success'}>{alert.active ? 'Activa' : 'Resuelta'}</Badge>
+                <span>{alert.type.replaceAll('_', ' ')}</span>
+                <time className="text-zinc-400" dateTime={alert.resolvedAt || alert.openedAt}>
+                  {new Date(alert.resolvedAt || alert.openedAt).toLocaleString()}
+                </time>
+              </li>
+            ))}
+          </ul>
+        )}
+      </Card>
       <TelemetryHistoryTable history={history} />
     </div>
   )
