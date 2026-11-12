@@ -9,6 +9,10 @@ en el repositorio `ColdTrack-Gateway` en el puerto 5000. Abrir
 
 Para preparar el frontend de producción, ejecutar `npm run build`.
 Flask sirve el directorio `dist` y el dashboard usa la API del mismo origen.
+En Netlify, publicá `dist/` completo. Vite copia `public/_redirects` a
+`dist/_redirects` para que Netlify reenvíe `/api/*` y `/health` a Flask en
+PythonAnywhere. Después de publicar, verificá que `/api/session` devuelva JSON
+desde el dominio de Netlify.
 El procedimiento de despliegue y las variables de sesión están en el
 [README del backend](https://github.com/abcdfer/ColdTrack-Gateway).
 
