@@ -9,17 +9,17 @@ export function Button({
   ...props
 }) {
   const baseStyles =
-    'inline-flex items-center justify-center gap-2 font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#BECFFF]/40 disabled:cursor-not-allowed select-none rounded-lg cursor-pointer'
+    'inline-flex items-center justify-center gap-2 font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-cold-ice/40 disabled:cursor-not-allowed select-none rounded-lg cursor-pointer'
 
   const variants = {
     primary:
-      'bg-[#BECFFF] text-black font-semibold hover:bg-white hover:shadow-[0_0_20px_rgba(190,207,255,0.45)] active:scale-[0.98] disabled:bg-[#1F2430] disabled:text-[#9CA3AF]/40 disabled:shadow-none',
+      'bg-cold-ice text-cold-on-accent font-semibold hover:bg-cold-accent-hover hover:shadow-[0_0_20px_rgba(190,207,255,0.45)] active:scale-[0.98] disabled:bg-cold-disabled disabled:text-cold-muted/40 disabled:shadow-none',
     secondary:
-      'bg-[#A296BC]/15 text-[#BECFFF] border border-[#A296BC]/30 hover:bg-[#A296BC]/25 hover:border-[#BECFFF]/40 active:scale-[0.98] disabled:bg-[#121216] disabled:text-[#9CA3AF]/30 disabled:border-transparent',
+      'bg-cold-lavender/15 text-cold-ice border border-cold-lavender/30 hover:bg-cold-lavender/25 hover:border-cold-ice/40 active:scale-[0.98] disabled:bg-cold-subtle disabled:text-cold-muted/30 disabled:border-transparent',
     outline:
-      'bg-transparent text-[#F3F4F6] border border-white/15 hover:border-[#BECFFF]/50 hover:text-[#BECFFF] hover:bg-[#BECFFF]/5 active:scale-[0.98] disabled:opacity-40 disabled:border-white/5',
+      'bg-transparent text-cold-text border border-cold-divider/15 hover:border-cold-ice/50 hover:text-cold-ice hover:bg-cold-ice/5 active:scale-[0.98] disabled:opacity-40 disabled:border-cold-divider/5',
     ghost:
-      'bg-transparent text-[#9CA3AF] hover:text-[#F3F4F6] hover:bg-white/5 active:scale-[0.98] disabled:opacity-40',
+      'bg-transparent text-cold-muted hover:text-cold-text hover:bg-cold-divider/5 active:scale-[0.98] disabled:opacity-40',
     danger:
       'bg-rose-500/20 text-rose-300 border border-rose-500/30 hover:bg-rose-500/30 hover:border-rose-400 active:scale-[0.98] disabled:opacity-40',
   }

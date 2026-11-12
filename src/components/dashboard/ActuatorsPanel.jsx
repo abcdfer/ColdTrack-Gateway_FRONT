@@ -21,16 +21,16 @@ export function ActuatorsPanel({ data }) {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-      <Card className="border-[#BECFFF]/20">
+      <Card className="border-cold-ice/20">
         <CardHeader className="mb-2">
           <CardTitle>
-            <Zap className="w-4 h-4 text-[#BECFFF]" />
+            <Zap className="w-4 h-4 text-cold-ice" />
             Compresor
           </CardTitle>
-          <span className="font-mono text-xs text-[#9CA3AF]">PWM / Potencia</span>
+          <span className="font-mono text-xs text-cold-muted">PWM / Potencia</span>
         </CardHeader>
         <div className="flex items-baseline justify-between">
-          <span className="font-heading font-bold text-3xl text-[#F3F4F6]">
+          <span className="font-heading font-bold text-3xl text-cold-text">
             {compresor}%
           </span>
           <span
@@ -45,81 +45,81 @@ export function ActuatorsPanel({ data }) {
         </div>
         <div className="w-full bg-zinc-900 rounded-full h-1.5 mt-3 overflow-hidden">
           <div
-            className="bg-[#BECFFF] h-full rounded-full transition-all duration-300 shadow-[0_0_8px_rgba(190,207,255,0.5)]"
+            className="bg-cold-ice h-full rounded-full transition-all duration-300 shadow-[0_0_8px_rgba(190,207,255,0.5)]"
             style={{ width: `${Math.min(compresor, 100)}%` }}
           />
         </div>
       </Card>
 
-      <Card className="border-[#A296BC]/20">
+      <Card className="border-cold-lavender/20">
         <CardHeader className="mb-2">
-          <CardTitle className="text-[#A296BC]">
-            <Fan className="w-4 h-4 text-[#A296BC]" />
+          <CardTitle className="text-cold-lavender">
+            <Fan className="w-4 h-4 text-cold-lavender" />
             Forzador / Fan
           </CardTitle>
-          <span className="font-mono text-xs text-[#9CA3AF]">
+          <span className="font-mono text-xs text-cold-muted">
             {fanRpm ? `${Math.round(fanRpm)} RPM` : 'RPM N/A'}
           </span>
         </CardHeader>
         <div className="flex items-baseline justify-between">
-          <span className="font-heading font-bold text-3xl text-[#F3F4F6]">
+          <span className="font-heading font-bold text-3xl text-cold-text">
             {fanSolicitado}%
           </span>
-          <span className="font-mono text-xs text-[#9CA3AF]">
+          <span className="font-mono text-xs text-cold-muted">
             PWM {fanPWM}/255
           </span>
         </div>
         <div className="w-full bg-zinc-900 rounded-full h-1.5 mt-3 overflow-hidden">
           <div
-            className="bg-[#A296BC] h-full rounded-full transition-all duration-300 shadow-[0_0_8px_rgba(162,150,188,0.5)]"
+            className="bg-cold-lavender h-full rounded-full transition-all duration-300 shadow-[0_0_8px_rgba(162,150,188,0.5)]"
             style={{ width: `${Math.min(fanSolicitado, 100)}%` }}
           />
         </div>
       </Card>
 
-      <Card className="border-[#A296BC]/20">
+      <Card className="border-cold-lavender/20">
         <CardHeader className="mb-2">
-          <CardTitle className="text-[#A296BC]">
-            <Gauge className="w-4 h-4 text-[#BECFFF]" />
+          <CardTitle className="text-cold-lavender">
+            <Gauge className="w-4 h-4 text-cold-ice" />
             Presiones Circuito
           </CardTitle>
-          <span className="font-mono text-xs text-[#9CA3AF]">Baja / Alta</span>
+          <span className="font-mono text-xs text-cold-muted">Baja / Alta</span>
         </CardHeader>
         <div className="grid grid-cols-2 gap-2 text-center">
-          <div className="bg-zinc-900/60 p-2 rounded-lg border border-white/5">
-            <span className="text-[10px] text-[#9CA3AF] uppercase block font-medium">Baja</span>
-            <span className="font-heading font-bold text-xl text-[#BECFFF]">
+          <div className="bg-zinc-900/60 p-2 rounded-lg border border-cold-divider/5">
+            <span className="text-[10px] text-cold-muted uppercase block font-medium">Baja</span>
+            <span className="font-heading font-bold text-xl text-cold-ice">
               {presionBaja}%
             </span>
           </div>
-          <div className="bg-zinc-900/60 p-2 rounded-lg border border-white/5">
-            <span className="text-[10px] text-[#9CA3AF] uppercase block font-medium">Alta</span>
-            <span className="font-heading font-bold text-xl text-[#F3F4F6]">
+          <div className="bg-zinc-900/60 p-2 rounded-lg border border-cold-divider/5">
+            <span className="text-[10px] text-cold-muted uppercase block font-medium">Alta</span>
+            <span className="font-heading font-bold text-xl text-cold-text">
               {presionAlta}%
             </span>
           </div>
         </div>
       </Card>
 
-      <Card className="border-[#A296BC]/20">
+      <Card className="border-cold-lavender/20">
         <CardHeader className="mb-2">
-          <CardTitle className="text-[#A296BC]">
-            <Clock className="w-4 h-4 text-[#A296BC]" />
+          <CardTitle className="text-cold-lavender">
+            <Clock className="w-4 h-4 text-cold-lavender" />
             Tiempo de Actividad
           </CardTitle>
-          <span className="font-mono text-xs text-[#9CA3AF]">Uptime</span>
+          <span className="font-mono text-xs text-cold-muted">Uptime</span>
         </CardHeader>
         <div className="flex items-baseline justify-between pt-1">
-          <span className="font-heading font-mono font-bold text-2xl text-[#F3F4F6]">
+          <span className="font-heading font-mono font-bold text-2xl text-cold-text">
             {formatUptime(uptimeMs)}
           </span>
-          <span className="text-[10px] font-mono text-[#9CA3AF]">
+          <span className="text-[10px] font-mono text-cold-muted">
             {uptimeMs ? `${uptimeMs} ms` : 'Sin datos'}
           </span>
         </div>
-        <div className="mt-3 text-xs text-[#9CA3AF] flex items-center justify-between border-t border-white/10 pt-2">
+        <div className="mt-3 text-xs text-cold-muted flex items-center justify-between border-t border-cold-divider/10 pt-2">
           <span>Reloj RTC:</span>
-          <span className="text-[#BECFFF] font-mono">Sincronizado</span>
+          <span className="text-cold-ice font-mono">Sincronizado</span>
         </div>
       </Card>
     </div>

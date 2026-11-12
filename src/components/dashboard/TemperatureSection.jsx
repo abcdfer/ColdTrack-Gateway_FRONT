@@ -13,10 +13,10 @@ export function TemperatureSection({ data }) {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-      <Card className="md:col-span-1 border-[#BECFFF]/25 bg-gradient-to-br from-[#0C0B0E] via-[#0C0B0E] to-[#BECFFF]/5">
+      <Card className="md:col-span-1 border-cold-ice/25 bg-gradient-to-br from-cold-surface via-cold-surface to-cold-ice/5">
         <CardHeader className="mb-2">
           <CardTitle>
-            <Thermometer className="w-4 h-4 text-[#BECFFF]" />
+            <Thermometer className="w-4 h-4 text-cold-ice" />
             Cámara Interior
           </CardTitle>
           {diagnostico ? (
@@ -37,18 +37,18 @@ export function TemperatureSection({ data }) {
 
         <div className="flex flex-col items-center justify-center py-4">
           <div className="relative flex items-baseline gap-1">
-            <span className="font-heading font-extrabold text-5xl sm:text-6xl text-[#F3F4F6] tracking-tight">
+            <span className="font-heading font-extrabold text-5xl sm:text-6xl text-cold-text tracking-tight">
               {tempInterior !== null ? tempInterior.toFixed(1) : '--'}
             </span>
-            <span className="text-2xl font-semibold text-[#BECFFF]">°C</span>
+            <span className="text-2xl font-semibold text-cold-ice">°C</span>
           </div>
 
-          <div className="w-full mt-4 bg-zinc-900/80 rounded-full h-2.5 overflow-hidden border border-white/5 relative">
+          <div className="w-full mt-4 bg-zinc-900/80 rounded-full h-2.5 overflow-hidden border border-cold-divider/5 relative">
             <div
               className={`h-full transition-all duration-500 rounded-full ${
                 isFault
                   ? 'bg-rose-500 shadow-[0_0_12px_rgba(244,63,94,0.6)]'
-                  : 'bg-[#BECFFF] shadow-[0_0_12px_rgba(190,207,255,0.6)]'
+                  : 'bg-cold-ice shadow-[0_0_12px_rgba(190,207,255,0.6)]'
               }`}
               style={{
                 width: tempInterior !== null
@@ -58,84 +58,84 @@ export function TemperatureSection({ data }) {
             />
           </div>
 
-          <div className="flex justify-between w-full text-[10px] text-[#9CA3AF] mt-1.5 px-0.5">
+          <div className="flex justify-between w-full text-[10px] text-cold-muted mt-1.5 px-0.5">
             <span>-30°C</span>
-            <span className="text-[#BECFFF]">Escala Térmica</span>
+            <span className="text-cold-ice">Escala Térmica</span>
             <span>+30°C</span>
           </div>
         </div>
 
-        <div className="pt-3 border-t border-white/10 flex items-center justify-between text-xs text-[#9CA3AF]">
+        <div className="pt-3 border-t border-cold-divider/10 flex items-center justify-between text-xs text-cold-muted">
           <span>Estado Reportado (DB):</span>
-          <span className="text-[#F3F4F6] font-medium font-mono">
+          <span className="text-cold-text font-medium font-mono">
             {estado || 'N/A'}
           </span>
         </div>
       </Card>
 
-      <Card className="border-[#A296BC]/20">
+      <Card className="border-cold-lavender/20">
         <CardHeader className="mb-2">
-          <CardTitle className="text-[#A296BC]">
-            <Flame className="w-4 h-4 text-[#A296BC]" />
+          <CardTitle className="text-cold-lavender">
+            <Flame className="w-4 h-4 text-cold-lavender" />
             Temp. Condensador
           </CardTitle>
-          <span className="text-xs text-[#9CA3AF] font-mono">Lado Alta</span>
+          <span className="text-xs text-cold-muted font-mono">Lado Alta</span>
         </CardHeader>
 
         <div className="flex items-baseline gap-1 py-3">
-          <span className="font-heading font-bold text-4xl text-[#F3F4F6]">
+          <span className="font-heading font-bold text-4xl text-cold-text">
             {tempCondensador !== null ? tempCondensador.toFixed(1) : '--'}
           </span>
-          <span className="text-lg font-medium text-[#A296BC]">°C</span>
+          <span className="text-lg font-medium text-cold-lavender">°C</span>
         </div>
 
-        <div className="space-y-2 pt-3 border-t border-white/10 text-xs">
-          <div className="flex items-center justify-between text-[#9CA3AF]">
+        <div className="space-y-2 pt-3 border-t border-cold-divider/10 text-xs">
+          <div className="flex items-center justify-between text-cold-muted">
             <span>Diferencial Cond-Int:</span>
-            <span className="text-[#BECFFF] font-mono flex items-center gap-0.5">
+            <span className="text-cold-ice font-mono flex items-center gap-0.5">
               <ArrowUpRight className="w-3 h-3" />
               {tempCondensador !== null && tempInterior !== null
                 ? `${(tempCondensador - tempInterior).toFixed(1)}°C`
                 : '--'}
             </span>
           </div>
-          <div className="flex items-center justify-between text-[#9CA3AF]">
+          <div className="flex items-center justify-between text-cold-muted">
             <span>Registro Backend:</span>
-            <span className="text-[#F3F4F6] font-mono">
+            <span className="text-cold-text font-mono">
               {data?.receivedAt ? new Date(data.receivedAt).toLocaleTimeString() : 'N/A'}
             </span>
           </div>
         </div>
       </Card>
 
-      <Card className="border-[#A296BC]/20">
+      <Card className="border-cold-lavender/20">
         <CardHeader className="mb-2">
-          <CardTitle className="text-[#A296BC]">
-            <Snowflake className="w-4 h-4 text-[#BECFFF]" />
+          <CardTitle className="text-cold-lavender">
+            <Snowflake className="w-4 h-4 text-cold-ice" />
             Temp. Succión
           </CardTitle>
-          <span className="text-xs text-[#9CA3AF] font-mono">Lado Baja</span>
+          <span className="text-xs text-cold-muted font-mono">Lado Baja</span>
         </CardHeader>
 
         <div className="flex items-baseline gap-1 py-3">
-          <span className="font-heading font-bold text-4xl text-[#F3F4F6]">
+          <span className="font-heading font-bold text-4xl text-cold-text">
             {tempSuccion !== null ? tempSuccion.toFixed(1) : '--'}
           </span>
-          <span className="text-lg font-medium text-[#A296BC]">°C</span>
+          <span className="text-lg font-medium text-cold-lavender">°C</span>
         </div>
 
-        <div className="space-y-2 pt-3 border-t border-white/10 text-xs">
-          <div className="flex items-center justify-between text-[#9CA3AF]">
+        <div className="space-y-2 pt-3 border-t border-cold-divider/10 text-xs">
+          <div className="flex items-center justify-between text-cold-muted">
             <span>Diferencial Succ-Int:</span>
-            <span className="text-[#F3F4F6] font-mono">
+            <span className="text-cold-text font-mono">
               {tempSuccion !== null && tempInterior !== null
                 ? `${(tempSuccion - tempInterior).toFixed(1)} K`
                 : '--'}
             </span>
           </div>
-          <div className="flex items-center justify-between text-[#9CA3AF]">
+          <div className="flex items-center justify-between text-cold-muted">
             <span>Uptime Hardware:</span>
-            <span className="text-[#BECFFF] font-mono">
+            <span className="text-cold-ice font-mono">
               {data?.uptimeMs !== undefined ? `${data.uptimeMs} ms` : 'N/A'}
             </span>
           </div>

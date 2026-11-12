@@ -27,17 +27,17 @@ export function Modal({ isOpen, onClose, title, children, className }) {
       />
       <div
         className={cn(
-          'relative w-full max-w-xl glass-panel rounded-2xl p-6 shadow-2xl z-10 border border-[#BECFFF]/25 overflow-hidden animate-in fade-in zoom-in-95 duration-200',
+          'relative w-full max-w-xl glass-panel rounded-2xl p-6 shadow-2xl z-10 border border-cold-ice/25 overflow-hidden animate-in fade-in zoom-in-95 duration-200',
           className
         )}
       >
-        <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-4">
-          <h2 className="font-heading text-lg font-bold text-[#F3F4F6] tracking-wide flex items-center gap-2">
+        <div className="flex items-center justify-between pb-4 border-b border-cold-divider/10 mb-4">
+          <h2 className="font-heading text-lg font-bold text-cold-text tracking-wide flex items-center gap-2">
             {title}
           </h2>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-[#9CA3AF] hover:text-[#BECFFF] hover:bg-white/10 transition-colors cursor-pointer"
+            className="p-1.5 rounded-lg text-cold-muted hover:text-cold-ice hover:bg-cold-divider/10 transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>

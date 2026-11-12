@@ -42,16 +42,16 @@ export function FleetOperationalTargets({ devices = [], latestDataMap = {} }) {
   const safetyRate = total > 0 ? Math.round((safeCircuits / total) * 100) : 100
 
   return (
-    <Card className="border-[#BECFFF]/20 p-5 flex flex-col justify-between">
+    <Card className="border-cold-ice/20 p-5 flex flex-col justify-between">
       <div>
-        <div className="flex items-center justify-between pb-3.5 border-b border-white/10 mb-4">
+        <div className="flex items-center justify-between pb-3.5 border-b border-cold-divider/10 mb-4">
           <div className="flex items-center gap-2">
-            <h3 className="font-heading font-bold text-sm tracking-wide text-[#F3F4F6] uppercase">
+            <h3 className="font-heading font-bold text-sm tracking-wide text-cold-text uppercase">
               Rendimiento Operativo Real
             </h3>
-            <Snowflake className="w-4 h-4 text-[#BECFFF]" />
+            <Snowflake className="w-4 h-4 text-cold-ice" />
           </div>
-          <span className="text-[10px] font-mono text-[#A296BC]">
+          <span className="text-[10px] font-mono text-cold-lavender">
             Telemetría Persistida
           </span>
         </div>
@@ -59,70 +59,70 @@ export function FleetOperationalTargets({ devices = [], latestDataMap = {} }) {
         <div className="space-y-4">
           <div>
             <div className="flex items-center justify-between text-xs mb-1.5">
-              <span className="text-[#9CA3AF]">Unidades en Régimen Nominal</span>
-              <span className="font-mono font-bold text-[#BECFFF]">
+              <span className="text-cold-muted">Unidades en Régimen Nominal</span>
+              <span className="font-mono font-bold text-cold-ice">
                 {healthRate}%
               </span>
             </div>
-            <div className="w-full bg-zinc-900 rounded-full h-2 overflow-hidden border border-white/5">
+            <div className="w-full bg-zinc-900 rounded-full h-2 overflow-hidden border border-cold-divider/5">
               <div
-                className="h-full rounded-full bg-gradient-to-r from-[#BECFFF] to-cyan-400 shadow-[0_0_12px_rgba(190,207,255,0.4)]"
+                className="h-full rounded-full bg-gradient-to-r from-cold-ice to-cyan-400 shadow-[0_0_12px_rgba(190,207,255,0.4)]"
                 style={{ width: `${healthRate}%` }}
               />
             </div>
-            <span className="text-[10px] text-[#A296BC] font-mono mt-1 block">
+            <span className="text-[10px] text-cold-lavender font-mono mt-1 block">
               {withoutFaults} de {total} equipos sin fallas
             </span>
           </div>
 
           <div>
             <div className="flex items-center justify-between text-xs mb-1.5">
-              <span className="text-[#9CA3AF]">Carga Promedio de Compresores</span>
-              <span className="font-mono font-bold text-[#A296BC]">
+              <span className="text-cold-muted">Carga Promedio de Compresores</span>
+              <span className="font-mono font-bold text-cold-lavender">
                 {countWithCompresor > 0 ? `${avgCompresor}%` : 'N/A'}
               </span>
             </div>
-            <div className="w-full bg-zinc-900 rounded-full h-2 overflow-hidden border border-white/5">
+            <div className="w-full bg-zinc-900 rounded-full h-2 overflow-hidden border border-cold-divider/5">
               <div
-                className="h-full rounded-full bg-gradient-to-r from-[#A296BC] to-purple-400 shadow-[0_0_12px_rgba(162,150,188,0.4)]"
+                className="h-full rounded-full bg-gradient-to-r from-cold-lavender to-purple-400 shadow-[0_0_12px_rgba(162,150,188,0.4)]"
                 style={{ width: `${Math.min(avgCompresor, 100)}%` }}
               />
             </div>
-            <span className="text-[10px] text-[#A296BC] font-mono mt-1 block">
+            <span className="text-[10px] text-cold-lavender font-mono mt-1 block">
               Lectura real de modulaciones activas
             </span>
           </div>
 
           <div>
             <div className="flex items-center justify-between text-xs mb-1.5">
-              <span className="text-[#9CA3AF]">Flujo de Forzadores Evaporador</span>
-              <span className="font-mono font-bold text-[#BECFFF]">
+              <span className="text-cold-muted">Flujo de Forzadores Evaporador</span>
+              <span className="font-mono font-bold text-cold-ice">
                 {countWithFan > 0 ? `${avgFan}%` : 'N/A'}
               </span>
             </div>
-            <div className="w-full bg-zinc-900 rounded-full h-2 overflow-hidden border border-white/5">
+            <div className="w-full bg-zinc-900 rounded-full h-2 overflow-hidden border border-cold-divider/5">
               <div
-                className="h-full rounded-full bg-gradient-to-r from-[#BECFFF]/70 to-[#A296BC] shadow-[0_0_12px_rgba(190,207,255,0.3)]"
+                className="h-full rounded-full bg-gradient-to-r from-cold-ice/70 to-cold-lavender shadow-[0_0_12px_rgba(190,207,255,0.3)]"
                 style={{ width: `${Math.min(avgFan, 100)}%` }}
               />
             </div>
-            <span className="text-[10px] text-[#9CA3AF] font-mono mt-1 block">
+            <span className="text-[10px] text-cold-muted font-mono mt-1 block">
               Ventilación reportada en telemetría
             </span>
           </div>
         </div>
       </div>
 
-      <div className="mt-6 pt-4 border-t border-white/10 flex items-center justify-between bg-black/40 p-3 rounded-xl border border-white/5">
+      <div className="mt-6 pt-4 border-t border-cold-divider/10 flex items-center justify-between bg-cold-shade/40 p-3 rounded-xl border border-cold-divider/5">
         <div className="flex items-center gap-2.5">
           <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-400">
             <ShieldCheck className="w-4 h-4" />
           </div>
           <div>
-            <span className="font-heading font-bold text-xs text-[#F3F4F6] block">
+            <span className="font-heading font-bold text-xs text-cold-text block">
               Circuitos de Presión Seguros
             </span>
-            <span className="text-[10px] text-[#9CA3AF]">
+            <span className="text-[10px] text-cold-muted">
               Presostatos sin disparos
             </span>
           </div>

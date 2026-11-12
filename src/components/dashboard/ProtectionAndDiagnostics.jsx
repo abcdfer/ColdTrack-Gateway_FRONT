@@ -17,9 +17,9 @@ export function ProtectionAndDiagnostics({ data }) {
     (data?.estado && data.estado !== 'NORMAL' && data.estado !== 'OPERATIVO')
 
   return (
-    <Card className={`border ${hasFault ? 'border-rose-500/30' : 'border-[#BECFFF]/20'}`}>
+    <Card className={`border ${hasFault ? 'border-rose-500/30' : 'border-cold-ice/20'}`}>
       <CardHeader>
-        <CardTitle className={hasFault ? 'text-rose-400' : 'text-[#BECFFF]'}>
+        <CardTitle className={hasFault ? 'text-rose-400' : 'text-cold-ice'}>
           {hasFault ? (
             <ShieldAlert className="w-5 h-5 text-rose-400" />
           ) : (
@@ -38,12 +38,12 @@ export function ProtectionAndDiagnostics({ data }) {
       </CardHeader>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-3 pt-2">
-        <div className="p-3 rounded-xl bg-black/40 border border-white/5 flex flex-col justify-between">
-          <span className="text-xs text-[#9CA3AF] font-medium">Diagnóstico API / DB</span>
-          <span className="font-heading font-semibold text-sm text-[#F3F4F6] mt-1 font-mono">
+        <div className="p-3 rounded-xl bg-cold-shade/40 border border-cold-divider/5 flex flex-col justify-between">
+          <span className="text-xs text-cold-muted font-medium">Diagnóstico API / DB</span>
+          <span className="font-heading font-semibold text-sm text-cold-text mt-1 font-mono">
             {diagnostico}
           </span>
-          <span className="text-[10px] text-[#A296BC] mt-2">
+          <span className="text-[10px] text-cold-lavender mt-2">
             Fuente: Base de datos ColdTrack
           </span>
         </div>
@@ -52,7 +52,7 @@ export function ProtectionAndDiagnostics({ data }) {
           className={`p-3 rounded-xl border flex flex-col justify-between transition-colors ${
             proteccionAlta
               ? 'bg-rose-500/15 border-rose-500/40 text-rose-200'
-              : 'bg-black/40 border-white/5 text-[#9CA3AF]'
+              : 'bg-cold-shade/40 border-cold-divider/5 text-cold-muted'
           }`}
         >
           <div className="flex items-center justify-between">
@@ -63,12 +63,12 @@ export function ProtectionAndDiagnostics({ data }) {
           </div>
           <span
             className={`font-heading font-semibold text-sm mt-1 font-mono ${
-              proteccionAlta ? 'text-rose-400 font-bold' : 'text-[#F3F4F6]'
+              proteccionAlta ? 'text-rose-400 font-bold' : 'text-cold-text'
             }`}
           >
             {proteccionAlta ? 'DISPARADA (HP_TRIP)' : 'NORMAL'}
           </span>
-          <span className="text-[10px] text-[#A296BC] mt-2">
+          <span className="text-[10px] text-cold-lavender mt-2">
             Sensor presostático HP
           </span>
         </div>
@@ -77,7 +77,7 @@ export function ProtectionAndDiagnostics({ data }) {
           className={`p-3 rounded-xl border flex flex-col justify-between transition-colors ${
             proteccionBaja
               ? 'bg-rose-500/15 border-rose-500/40 text-rose-200'
-              : 'bg-black/40 border-white/5 text-[#9CA3AF]'
+              : 'bg-cold-shade/40 border-cold-divider/5 text-cold-muted'
           }`}
         >
           <div className="flex items-center justify-between">
@@ -88,12 +88,12 @@ export function ProtectionAndDiagnostics({ data }) {
           </div>
           <span
             className={`font-heading font-semibold text-sm mt-1 font-mono ${
-              proteccionBaja ? 'text-rose-400 font-bold' : 'text-[#F3F4F6]'
+              proteccionBaja ? 'text-rose-400 font-bold' : 'text-cold-text'
             }`}
           >
             {proteccionBaja ? 'DISPARADA (LP_TRIP)' : 'NORMAL'}
           </span>
-          <span className="text-[10px] text-[#A296BC] mt-2">
+          <span className="text-[10px] text-cold-lavender mt-2">
             Sensor presostático LP
           </span>
         </div>
@@ -102,7 +102,7 @@ export function ProtectionAndDiagnostics({ data }) {
           className={`p-3 rounded-xl border flex flex-col justify-between transition-colors ${
             ordenParoCompresor
               ? 'bg-amber-500/15 border-amber-500/40 text-amber-200'
-              : 'bg-black/40 border-white/5 text-[#9CA3AF]'
+              : 'bg-cold-shade/40 border-cold-divider/5 text-cold-muted'
           }`}
         >
           <div className="flex items-center justify-between">
@@ -115,12 +115,12 @@ export function ProtectionAndDiagnostics({ data }) {
           </div>
           <span
             className={`font-heading font-semibold text-sm mt-1 font-mono ${
-              ordenParoCompresor ? 'text-amber-400 font-bold' : 'text-[#F3F4F6]'
+              ordenParoCompresor ? 'text-amber-400 font-bold' : 'text-cold-text'
             }`}
           >
             {ordenParoCompresor ? 'ORDEN ACTIVA' : 'INACTIVA'}
           </span>
-          <span className="text-[10px] text-[#A296BC] mt-2">
+          <span className="text-[10px] text-cold-lavender mt-2">
             Interlock de compresor
           </span>
         </div>

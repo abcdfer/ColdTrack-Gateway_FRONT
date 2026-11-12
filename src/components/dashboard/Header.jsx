@@ -12,10 +12,10 @@ export function Header({
   lastUpdated,
 }) {
   return (
-    <header className="border-b border-[#BECFFF]/10 bg-black/60 backdrop-blur-xl sticky top-0 z-40 px-4 lg:px-8 py-3.5 transition-all">
+    <header className="border-b border-cold-ice/10 bg-cold-shade/60 backdrop-blur-xl sticky top-0 z-40 px-4 lg:px-8 py-3.5 transition-all">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-4">
-          <div className="relative flex items-center justify-center h-11 w-11 rounded-xl bg-[#0C0B0E] border border-[#BECFFF]/25 overflow-hidden shadow-[0_0_15px_rgba(190,207,255,0.15)]">
+          <div className="relative flex items-center justify-center h-11 w-11 rounded-xl bg-cold-surface border border-cold-ice/25 overflow-hidden shadow-[0_0_15px_rgba(190,207,255,0.15)]">
             <img
               src="/logos/1.png"
               alt="ColdTrack"
@@ -27,8 +27,8 @@ export function Header({
           </div>
           <div>
             <div className="flex items-center gap-2.5">
-              <span className="font-heading text-xl font-bold tracking-tight text-[#F3F4F6]">
-                Cold<span className="text-[#BECFFF]">Track</span>
+              <span className="font-heading text-xl font-bold tracking-tight text-cold-text">
+                Cold<span className="text-cold-ice">Track</span>
               </span>
               <Badge variant={isConnected ? 'success' : 'danger'}>
                 <span
@@ -39,7 +39,7 @@ export function Header({
                 {isConnected ? 'API ONLINE' : 'DISCONNECTED'}
               </Badge>
             </div>
-            <p className="text-xs text-[#A296BC] font-medium tracking-wide">
+            <p className="text-xs text-cold-lavender font-medium tracking-wide">
               Industrial Cold Chain Telemetry System
             </p>
           </div>
@@ -47,9 +47,9 @@ export function Header({
 
         <div className="flex items-center gap-2.5 flex-wrap justify-end">
           {lastUpdated && (
-            <span className="text-xs text-[#9CA3AF] hidden sm:inline-block">
+            <span className="text-xs text-cold-muted hidden sm:inline-block">
               Sync:{' '}
-              <span className="text-[#BECFFF] font-mono">
+              <span className="text-cold-ice font-mono">
                 {lastUpdated.toLocaleTimeString()}
               </span>
             </span>
@@ -61,13 +61,13 @@ export function Header({
             onClick={() => setIsAutoRefresh(!isAutoRefresh)}
             className={
               isAutoRefresh
-                ? 'border-[#BECFFF]/40 text-[#BECFFF] bg-[#BECFFF]/5'
-                : 'text-[#9CA3AF]'
+                ? 'border-cold-ice/40 text-cold-ice bg-cold-ice/5'
+                : 'text-cold-muted'
             }
           >
             <Activity
               className={`w-3.5 h-3.5 ${
-                isAutoRefresh ? 'animate-pulse text-[#BECFFF]' : ''
+                isAutoRefresh ? 'animate-pulse text-cold-ice' : ''
               }`}
             />
             {isAutoRefresh ? 'Auto 3s' : 'Pausado'}
@@ -77,7 +77,7 @@ export function Header({
             variant="outline"
             size="sm"
             onClick={onRefresh}
-            className="hover:border-[#BECFFF]/40"
+            className="hover:border-cold-ice/40"
           >
             <RefreshCw className="w-3.5 h-3.5" />
             <span className="hidden sm:inline">Refrescar</span>
@@ -87,7 +87,7 @@ export function Header({
             variant="secondary"
             size="sm"
             onClick={onOpenSimulator}
-            className="border-[#A296BC]/40"
+            className="border-cold-lavender/40"
           >
             <Sliders className="w-3.5 h-3.5" />
             Simulador

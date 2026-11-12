@@ -46,6 +46,7 @@ export default function App() {
     latestData,
     latestDataMap,
     history,
+    alerts,
     isAutoRefresh,
     setIsAutoRefresh,
     lastUpdated,
@@ -55,16 +56,10 @@ export default function App() {
     pollingCadenceLabel,
   } = useTelemetry(activeDeviceFromUrl)
 
-  const alertCount = devices.filter((d) => {
-    const data = latestDataMap[d.deviceId]
-    return (
-      (data?.diagnostico && data.diagnostico !== 'SIN_FALLAS') ||
-      (d.diagnostico && d.diagnostico !== 'SIN_FALLAS')
-    )
-  }).length
+  const alertCount = devices.filter((d) => (latestDataMap[d.deviceId]?.state || d.state) === 'alert').length
 
   return (
-    <div className="min-h-screen bg-black text-[#F3F4F6] flex flex-col font-sans selection:bg-[#BECFFF]/20 selection:text-[#BECFFF]">
+    <div className="min-h-screen bg-cold-dark text-cold-text flex flex-col font-sans selection:bg-cold-ice/20 selection:text-cold-ice">
       <div className="flex-1 w-full max-w-[1720px] mx-auto p-3 sm:p-5 flex gap-4 lg:gap-5">
         <div className="hidden lg:block">
           <Sidebar
@@ -105,11 +100,11 @@ export default function App() {
                   <AlertCircle className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="font-heading font-semibold text-xs text-[#F3F4F6]">
+                  <h4 className="font-heading font-semibold text-xs text-cold-text">
                     ColdTrack API Desconectada
                   </h4>
-                  <p className="text-[11px] text-[#9CA3AF] mt-0.5">
-                    Verifica que <span className="font-mono text-[#BECFFF]">apy.py</span> esté en ejecución en el puerto 5000 o abre el simulador para inyectar datos de prueba.
+                  <p className="text-[11px] text-cold-muted mt-0.5">
+                    No se pudieron actualizar los datos. Volvé a intentar la conexión.
                   </p>
                 </div>
               </div>
@@ -136,6 +131,7 @@ export default function App() {
                 devices={devices}
                 latestData={latestData}
                 history={history}
+                alerts={alerts}
                 onRefresh={refreshData}
                 onOpenSimulator={() => setIsSimulatorOpen(true)}
                 monitoringStatus={monitoringStatus}
@@ -176,7 +172,6 @@ export default function App() {
         isOpen={isInfoOpen}
         onClose={() => setIsInfoOpen(false)}
         healthInfo={healthInfo}
-        onRefresh={refreshData}
       />
 
       <UnderConstructionModal
