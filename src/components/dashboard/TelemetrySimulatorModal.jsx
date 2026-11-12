@@ -20,20 +20,22 @@ const fields = [
   ['presionBaja', 'Presión baja (%)', 0, 100],
 ]
 
-export function TelemetrySimulatorModal({ isOpen, onClose, onInject }) {
+export function TelemetrySimulatorModal({ isOpen, onClose, onInject, deviceId }) {
   const [values, setValues] = useState(normal)
   const [pending, setPending] = useState(false)
   const [feedback, setFeedback] = useState(null)
 
   async function submit(event) {
     event.preventDefault()
+    if (!deviceId) return
     setPending(true)
     setFeedback(null)
     try {
-      const result = await onInject(Object.fromEntries(
-        fields.map(([key]) => [key, Number(values[key])]),
-      ))
-      setFeedback({ message: `SIM-001 · ${result.diagnostico.replaceAll('_', ' ')}` })
+      const readings = Object.fromEntries(fields.map(([key]) => [key, Number(values[key])]))
+      const result = await onInject({ ...readings, deviceId })
+      setFeedback({ message: result.samplingActive === false
+        ? 'La captura está pausada según la configuración del equipo.'
+        : deviceId + ' · ' + (result.diagnostico?.replaceAll('_', ' ') ?? 'Lectura registrada') })
     } catch (err) {
       setFeedback({ error: true, message: err.message })
     } finally {
@@ -44,7 +46,7 @@ export function TelemetrySimulatorModal({ isOpen, onClose, onInject }) {
   return (
     <Modal isOpen={isOpen} onClose={onClose} title="Simulador de telemetría">
       <form className="space-y-4 text-sm" onSubmit={submit}>
-        <p className="text-zinc-400">Enviá una lectura de prueba para el equipo SIM-001.</p>
+        <p className="text-zinc-400">{deviceId ? 'Enviá una lectura de prueba para el equipo ' + deviceId + '.' : 'Registrá un equipo en Operaciones para usar el simulador.'}</p>
         <div className="flex flex-wrap gap-2">
           {scenarios.map(({ label, values: preset }) => (
             <Button key={label} type="button" size="sm" variant="outline" disabled={pending}
@@ -67,7 +69,7 @@ export function TelemetrySimulatorModal({ isOpen, onClose, onInject }) {
           className={feedback.error ? 'text-rose-300' : 'text-cold-ice'}>{feedback.message}</p>}
         <div className="flex justify-end gap-2">
           <Button type="button" variant="ghost" onClick={onClose}>Cerrar</Button>
-          <Button type="submit" disabled={pending}>{pending ? 'Enviando…' : 'Enviar lectura'}</Button>
+          <Button type="submit" disabled={pending || !deviceId}>{pending ? 'Enviando…' : 'Enviar lectura'}</Button>
         </div>
       </form>
     </Modal>

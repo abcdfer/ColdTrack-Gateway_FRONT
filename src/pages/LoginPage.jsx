@@ -1,10 +1,13 @@
-import { lazy, Suspense } from 'react'
+import { lazy, Suspense, useState } from 'react'
 import { motion, useReducedMotion } from 'motion/react'
 import { ThemeToggle } from '@/components/common/ThemeToggle'
 
+const RegistrationForm = lazy(() => import('@/components/auth/RegistrationForm'))
 const LoginForm = lazy(() => import('@/components/auth/LoginForm'))
 
 export function LoginPage({ canLogin, onLogin, pending, error }) {
+  const [registering, setRegistering] = useState(false)
+  const [verified, setVerified] = useState(false)
   const reduceMotion = useReducedMotion()
 
   return (
@@ -18,11 +21,19 @@ export function LoginPage({ canLogin, onLogin, pending, error }) {
         <p className="mt-2 text-sm text-zinc-400">Monitoreo de equipos de frío</p>
         {canLogin && (
           <Suspense fallback={<p role="status" className="mt-4 text-sm">Cargando formulario…</p>}>
-            <LoginForm onLogin={onLogin} pending={pending} />
+            {registering ? <RegistrationForm onComplete={() => {
+              setVerified(true)
+              setRegistering(false)
+            }} /> : <LoginForm onLogin={onLogin} pending={pending} />}
+            <button type="button" className="mt-4 text-sm underline" disabled={pending}
+              onClick={() => { setVerified(false); setRegistering(!registering) }}>
+              {registering ? 'Volver a iniciar sesión' : 'Crear una cuenta'}
+            </button>
+            {verified && <p role="status" className="mt-3 text-sm">Correo verificado. Ya podés iniciar sesión.</p>}
           </Suspense>
         )}
         {!canLogin && !error && <p role="status" className="mt-4 text-sm">Conectando…</p>}
-        {error && <p role="alert" className="mt-4 text-sm text-rose-300">{error}</p>}
+        {error && !registering && <p role="alert" className="mt-4 text-sm text-rose-300">{error}</p>}
       </motion.section>
     </main>
   )
