@@ -1,0 +1,2 @@
+/api/*  https://abcdfer.pythonanywhere.com/api/:splat  200!
+/health  https://abcdfer.pythonanywhere.com/health  200!
