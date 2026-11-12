@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import {
   Truck,
   Activity,
@@ -68,8 +69,8 @@ export function Sidebar({
             Menú Principal
           </span>
           <nav className="space-y-1">
-            <a
-              href="/"
+            <Link
+              to="/"
               className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium transition-all ${
                 activeTab === 'fleet' && !activeDeviceId
                   ? 'bg-cold-ice/15 text-cold-ice border border-cold-ice/30 shadow-[0_0_12px_rgba(190,207,255,0.15)]'
@@ -78,7 +79,7 @@ export function Sidebar({
             >
               <Truck className="w-4 h-4 shrink-0" />
               <span>Flota de Frío</span>
-            </a>
+            </Link>
 
             <div
               className={`flex items-center justify-between px-2.5 py-1.5 rounded-xl border transition-all ${
@@ -87,32 +88,32 @@ export function Sidebar({
                   : 'border-transparent text-cold-muted hover:text-cold-text hover:bg-cold-divider/5'
               }`}
             >
-              <a
-                href={telemetryHref}
+              <Link
+                to={telemetryHref}
                 className="flex items-center gap-2.5 flex-1 py-1 text-xs font-medium"
               >
                 <Activity className="w-4 h-4 shrink-0" />
                 <span>Telemetría</span>
-              </a>
+              </Link>
 
               <div className="flex items-center gap-1 bg-cold-shade/40 px-1.5 py-0.5 rounded-lg border border-cold-divider/10 shrink-0">
-                <a
-                  href={`?device=${encodeURIComponent(prevDeviceId)}`}
+                <Link
+                  to={`?device=${encodeURIComponent(prevDeviceId)}`}
                   className="p-0.5 rounded hover:text-cold-ice hover:bg-cold-divider/10 transition-colors"
                   title={`Anterior: ${prevDeviceId}`}
                 >
                   <ChevronLeft className="w-3.5 h-3.5" />
-                </a>
+                </Link>
                 <span className="font-mono text-[10px] text-cold-ice px-0.5">
                   {currentTargetId}
                 </span>
-                <a
-                  href={`?device=${encodeURIComponent(nextDeviceId)}`}
+                <Link
+                  to={`?device=${encodeURIComponent(nextDeviceId)}`}
                   className="p-0.5 rounded hover:text-cold-ice hover:bg-cold-divider/10 transition-colors"
                   title={`Siguiente: ${nextDeviceId}`}
                 >
                   <ChevronRight className="w-3.5 h-3.5" />
-                </a>
+                </Link>
               </div>
             </div>
 

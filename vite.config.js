@@ -11,6 +11,10 @@ export default defineConfig({
       '/health': 'http://127.0.0.1:5000',
     },
   },
+  test: {
+    environment: 'jsdom',
+    setupFiles: './src/test-setup.js',
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),

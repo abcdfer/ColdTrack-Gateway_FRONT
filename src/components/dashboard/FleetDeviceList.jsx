@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { ExternalLink, Filter, Download, Clock, Thermometer, AlertCircle, CheckCircle2, Truck } from 'lucide-react'
 import { Card } from '../ui/Card'
 import { Badge } from '../ui/Badge'
@@ -129,15 +130,15 @@ export function FleetDeviceList({
                       </Badge>
                     </div>
 
-                    <a
-                      href={`?device=${encodeURIComponent(device.deviceId)}`}
+                    <Link
+                      to={`?device=${encodeURIComponent(device.deviceId)}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-lg bg-cold-ice/10 text-cold-ice border border-cold-ice/30 hover:bg-cold-ice hover:text-cold-on-accent font-semibold text-xs transition-all shrink-0"
                     >
                       <span>Telemetría</span>
                       <ExternalLink className="w-3 h-3" />
-                    </a>
+                    </Link>
                   </div>
                 </div>
               )

@@ -6,7 +6,7 @@ import {
   fetchTelemetry,
   fetchLatestTelemetry,
   sendTelemetry,
-} from '../services/apiService'
+} from '@/services/api'
 
 const SLOW_INTERVAL = 30000
 const FAST_INTERVAL = 5000

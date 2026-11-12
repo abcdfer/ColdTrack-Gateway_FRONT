@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { AlertCircle, RefreshCw } from 'lucide-react'
 import { useTelemetry } from './hooks/useTelemetry'
 import { Sidebar } from './components/layout/Sidebar'
@@ -13,31 +14,14 @@ import { UnderConstructionModal } from './components/ui/UnderConstructionModal'
 import { Button } from './components/ui/Button'
 
 export default function App() {
-  const [activeDeviceFromUrl, setActiveDeviceFromUrl] = useState(() => {
-    const params = new URLSearchParams(window.location.search)
-    return params.get('device') || null
-  })
+  const [params] = useSearchParams()
+  const activeDeviceFromUrl = params.get('device') || null
 
   const [activeTab, setActiveTab] = useState(activeDeviceFromUrl ? 'telemetry' : 'fleet')
   const [searchTerm, setSearchTerm] = useState('')
   const [isSimulatorOpen, setIsSimulatorOpen] = useState(false)
   const [isInfoOpen, setIsInfoOpen] = useState(false)
   const [underConstructionModule, setUnderConstructionModule] = useState(null)
-
-  useEffect(() => {
-    const handlePopState = () => {
-      const params = new URLSearchParams(window.location.search)
-      const dev = params.get('device') || null
-      setActiveDeviceFromUrl(dev)
-      if (dev) {
-        setActiveTab('telemetry')
-      } else {
-        setActiveTab('fleet')
-      }
-    }
-    window.addEventListener('popstate', handlePopState)
-    return () => window.removeEventListener('popstate', handlePopState)
-  }, [])
 
   const {
     isConnected,

@@ -1,6 +1,6 @@
 import { Server, Compass, Eye, Network } from 'lucide-react'
 import { Modal } from '../ui/Modal'
-import { getApiBaseUrl } from '../../services/apiService'
+import { getApiBaseUrl } from '@/services/api'
 
 export function SystemInfoModal({ isOpen, onClose, healthInfo }) {
   return (

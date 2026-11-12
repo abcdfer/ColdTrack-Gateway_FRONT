@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { ShieldCheck, Activity, ExternalLink } from 'lucide-react'
 
 export function Footer({ onOpenInfo }) {
@@ -96,12 +97,12 @@ export function Footer({ onOpenInfo }) {
 
             <ul className="space-y-2 text-xs">
               <li>
-                <a
-                  href="/"
+                <Link
+                  to="/"
                   className="text-cold-muted hover:text-cold-ice transition-colors block"
                 >
                   Monitor IoT & Diagnóstico
-                </a>
+                </Link>
               </li>
               <li>
                 <button
