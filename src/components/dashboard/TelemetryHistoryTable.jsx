@@ -28,27 +28,27 @@ export function TelemetryHistoryTable({ history = [] }) {
   }
 
   return (
-    <Card className="border-[#BECFFF]/15">
+    <Card className="border-cold-ice/15">
       <CardHeader className="flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
         <div>
           <CardTitle>
-            <History className="w-4 h-4 text-[#BECFFF]" />
+            <History className="w-4 h-4 text-cold-ice" />
             Registro Histórico de Telemetría
           </CardTitle>
-          <span className="text-xs text-[#9CA3AF]">
+          <span className="text-xs text-cold-muted">
             Últimas {history.length} lecturas procesadas por la API
           </span>
         </div>
 
         <div className="flex items-center gap-2 w-full sm:w-auto">
           <div className="relative flex-1 sm:w-48">
-            <Search className="w-3.5 h-3.5 absolute left-2.5 top-1/2 -translate-y-1/2 text-[#9CA3AF]" />
+            <Search className="w-3.5 h-3.5 absolute left-2.5 top-1/2 -translate-y-1/2 text-cold-muted" />
             <input
               type="text"
               placeholder="Filtrar eventos..."
               value={filter}
               onChange={(e) => setFilter(e.target.value)}
-              className="w-full bg-black/60 border border-white/10 rounded-lg pl-8 pr-3 py-1.5 text-xs text-[#F3F4F6] placeholder-[#9CA3AF] focus:outline-none focus:border-[#BECFFF]/40"
+              className="w-full bg-cold-shade/60 border border-cold-divider/10 rounded-lg pl-8 pr-3 py-1.5 text-xs text-cold-text placeholder-cold-muted focus:outline-none focus:border-cold-ice/40"
             />
           </div>
 
@@ -68,7 +68,7 @@ export function TelemetryHistoryTable({ history = [] }) {
       <div className="overflow-x-auto custom-scrollbar">
         <table className="w-full text-left text-xs">
           <thead>
-            <tr className="border-b border-white/10 text-[#A296BC] font-medium uppercase tracking-wider">
+            <tr className="border-b border-cold-divider/10 text-cold-lavender font-medium uppercase tracking-wider">
               <th className="py-2.5 px-3">Hora / Fecha</th>
               <th className="py-2.5 px-3">Equipo</th>
               <th className="py-2.5 px-3">T. Interior</th>
@@ -79,10 +79,10 @@ export function TelemetryHistoryTable({ history = [] }) {
               <th className="py-2.5 px-3">Diagnóstico</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-white/5">
+          <tbody className="divide-y divide-cold-divider/5">
             {filteredHistory.length === 0 ? (
               <tr>
-                <td colSpan={8} className="py-8 text-center text-[#9CA3AF]">
+                <td colSpan={8} className="py-8 text-center text-cold-muted">
                   No se encontraron lecturas registradas.
                 </td>
               </tr>
@@ -96,12 +96,12 @@ export function TelemetryHistoryTable({ history = [] }) {
                 return (
                   <tr
                     key={item.id || idx}
-                    className="hover:bg-white/[0.02] transition-colors"
+                    className="hover:bg-cold-divider/[0.02] transition-colors"
                   >
-                    <td className="py-2.5 px-3 font-mono text-[#F3F4F6]">
+                    <td className="py-2.5 px-3 font-mono text-cold-text">
                       {timestamp}
                     </td>
-                    <td className="py-2.5 px-3 font-mono font-medium text-[#BECFFF]">
+                    <td className="py-2.5 px-3 font-mono font-medium text-cold-ice">
                       {item.deviceId || 'N/A'}
                     </td>
                     <td className="py-2.5 px-3 font-mono">
@@ -109,7 +109,7 @@ export function TelemetryHistoryTable({ history = [] }) {
                         ? `${item.tempInterior.toFixed(1)}°C`
                         : '-'}
                     </td>
-                    <td className="py-2.5 px-3 font-mono text-[#9CA3AF]">
+                    <td className="py-2.5 px-3 font-mono text-cold-muted">
                       {typeof item.tempCondensador === 'number'
                         ? `${item.tempCondensador.toFixed(1)}°C`
                         : '-'}
@@ -120,7 +120,7 @@ export function TelemetryHistoryTable({ history = [] }) {
                     <td className="py-2.5 px-3 font-mono">
                       {item.compresor ?? '-'}%
                     </td>
-                    <td className="py-2.5 px-3 font-mono text-[#9CA3AF]">
+                    <td className="py-2.5 px-3 font-mono text-cold-muted">
                       {item.fanSolicitado ?? '-'}%
                     </td>
                     <td className="py-2.5 px-3">

@@ -13,20 +13,20 @@ export function FleetKPIs({ devices = [], latestDataMap = {} }) {
 
   return (
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5">
-      <Card className="border-[#BECFFF]/20 p-4">
+      <Card className="border-cold-ice/20 p-4">
         <div className="flex items-center justify-between">
-          <span className="text-[11px] text-[#9CA3AF] uppercase font-medium">
+          <span className="text-[11px] text-cold-muted uppercase font-medium">
             Total Unidades
           </span>
-          <div className="p-2 rounded-lg bg-[#BECFFF]/10 text-[#BECFFF]">
+          <div className="p-2 rounded-lg bg-cold-ice/10 text-cold-ice">
             <Truck className="w-4 h-4" />
           </div>
         </div>
         <div className="mt-2 flex items-baseline gap-2">
-          <span className="font-heading font-extrabold text-2xl sm:text-3xl text-[#F3F4F6]">
+          <span className="font-heading font-extrabold text-2xl sm:text-3xl text-cold-text">
             {total}
           </span>
-          <span className="text-[10px] text-[#BECFFF] font-medium font-mono">
+          <span className="text-[10px] text-cold-ice font-medium font-mono">
             {total > 0 ? '+100% registradas' : 'esperando'}
           </span>
         </div>
@@ -51,20 +51,20 @@ export function FleetKPIs({ devices = [], latestDataMap = {} }) {
         </div>
       </Card>
 
-      <Card className="border-[#BECFFF]/20 p-4">
+      <Card className="border-cold-ice/20 p-4">
         <div className="flex items-center justify-between">
-          <span className="text-[11px] text-[#BECFFF] uppercase font-medium">
+          <span className="text-[11px] text-cold-ice uppercase font-medium">
             Cadena Asegurada
           </span>
-          <div className="p-2 rounded-lg bg-[#BECFFF]/10 text-[#BECFFF]">
+          <div className="p-2 rounded-lg bg-cold-ice/10 text-cold-ice">
             <ShieldCheck className="w-4 h-4" />
           </div>
         </div>
         <div className="mt-2 flex items-baseline gap-2">
-          <span className="font-heading font-extrabold text-2xl sm:text-3xl text-[#F3F4F6]">
+          <span className="font-heading font-extrabold text-2xl sm:text-3xl text-cold-text">
             {complianceRate}%
           </span>
-          <span className="text-[10px] text-[#BECFFF] font-mono">
+          <span className="text-[10px] text-cold-ice font-mono">
             régimen térmico
           </span>
         </div>

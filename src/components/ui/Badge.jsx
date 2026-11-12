@@ -2,12 +2,12 @@ import { cn } from '../../utils/cn'
 
 export function Badge({ children, variant = 'default', className, ...props }) {
   const variants = {
-    default: 'bg-[#BECFFF]/10 text-[#BECFFF] border-[#BECFFF]/25',
-    secondary: 'bg-[#A296BC]/10 text-[#A296BC] border-[#A296BC]/25',
+    default: 'bg-cold-ice/10 text-cold-ice border-cold-ice/25',
+    secondary: 'bg-cold-lavender/10 text-cold-lavender border-cold-lavender/25',
     success: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/25',
     warning: 'bg-amber-500/10 text-amber-400 border-amber-500/25',
     danger: 'bg-rose-500/10 text-rose-400 border-rose-500/25',
-    outline: 'bg-transparent text-[#9CA3AF] border-white/10',
+    outline: 'bg-transparent text-cold-muted border-cold-divider/10',
   }
 
   return (

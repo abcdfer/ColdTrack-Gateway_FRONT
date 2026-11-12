@@ -29,14 +29,14 @@ export function FleetDeviceList({
   })
 
   return (
-    <Card className="border-[#BECFFF]/20 p-5 flex flex-col justify-between">
+    <Card className="border-cold-ice/20 p-5 flex flex-col justify-between">
       <div>
-        <div className="flex items-center justify-between pb-3.5 border-b border-white/10 mb-4">
+        <div className="flex items-center justify-between pb-3.5 border-b border-cold-divider/10 mb-4">
           <div className="flex items-center gap-2">
-            <h3 className="font-heading font-bold text-sm tracking-wide text-[#F3F4F6] uppercase">
+            <h3 className="font-heading font-bold text-sm tracking-wide text-cold-text uppercase">
               Equipos de Frío
             </h3>
-            <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#BECFFF]/10 text-[#BECFFF]">
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cold-ice/10 text-cold-ice">
               {filtered.length} unidades
             </span>
           </div>
@@ -44,7 +44,7 @@ export function FleetDeviceList({
           <div className="flex items-center gap-2 text-xs">
             <button
               onClick={onOpenSimulator}
-              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-white/10 text-[#9CA3AF] hover:text-[#BECFFF] hover:border-[#BECFFF]/30 transition-all cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-cold-divider/10 text-cold-muted hover:text-cold-ice hover:border-cold-ice/30 transition-all cursor-pointer"
             >
               <Filter className="w-3 h-3" />
               <span>Filtrar</span>
@@ -54,13 +54,13 @@ export function FleetDeviceList({
 
         {filtered.length === 0 ? (
           <div className="text-center py-12">
-            <Truck className="w-8 h-8 text-[#A296BC] mx-auto mb-2" />
-            <p className="text-xs text-[#9CA3AF]">
+            <Truck className="w-8 h-8 text-cold-lavender mx-auto mb-2" />
+            <p className="text-xs text-cold-muted">
               No se encontraron dispositivos registrados.
             </p>
             <button
               onClick={onOpenSimulator}
-              className="mt-3 px-3 py-1.5 rounded-lg bg-[#BECFFF] text-black font-semibold text-xs cursor-pointer shadow-sm"
+              className="mt-3 px-3 py-1.5 rounded-lg bg-cold-ice text-cold-on-accent font-semibold text-xs cursor-pointer shadow-sm"
             >
               Inyectar Telemetría Inicial
             </button>
@@ -80,16 +80,16 @@ export function FleetDeviceList({
               return (
                 <div
                   key={device.deviceId}
-                  className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-3.5 rounded-xl bg-black/40 border border-white/5 hover:border-[#BECFFF]/25 transition-all"
+                  className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-3.5 rounded-xl bg-cold-shade/40 border border-cold-divider/5 hover:border-cold-ice/25 transition-all"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-[#BECFFF]/10 border border-[#BECFFF]/25 flex items-center justify-center font-heading font-bold text-xs text-[#BECFFF] shrink-0">
+                    <div className="w-10 h-10 rounded-xl bg-cold-ice/10 border border-cold-ice/25 flex items-center justify-center font-heading font-bold text-xs text-cold-ice shrink-0">
                       {device.deviceId.replace(/[^a-zA-Z0-9]/g, '').slice(0, 2).toUpperCase() || 'CT'}
                     </div>
 
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="font-heading font-bold text-sm text-[#F3F4F6]">
+                        <span className="font-heading font-bold text-sm text-cold-text">
                           {device.deviceId}
                         </span>
                         <span
@@ -98,7 +98,7 @@ export function FleetDeviceList({
                           }`}
                         />
                       </div>
-                      <div className="flex items-center gap-2 text-[11px] text-[#A296BC] mt-0.5">
+                      <div className="flex items-center gap-2 text-[11px] text-cold-lavender mt-0.5">
                         <span className="flex items-center gap-1">
                           <Clock className="w-3 h-3" />
                           Recorrido: {formatUptime(uptimeMs)}
@@ -111,7 +111,7 @@ export function FleetDeviceList({
 
                   <div className="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end">
                     <div className="text-right">
-                      <span className="font-heading font-bold text-sm text-[#BECFFF] block font-mono">
+                      <span className="font-heading font-bold text-sm text-cold-ice block font-mono">
                         {typeof tempInterior === 'number'
                           ? `${tempInterior.toFixed(1)}°C`
                           : 'N/A'}
@@ -133,7 +133,7 @@ export function FleetDeviceList({
                       href={`?device=${encodeURIComponent(device.deviceId)}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-lg bg-[#BECFFF]/10 text-[#BECFFF] border border-[#BECFFF]/30 hover:bg-[#BECFFF] hover:text-black font-semibold text-xs transition-all shrink-0"
+                      className="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-lg bg-cold-ice/10 text-cold-ice border border-cold-ice/30 hover:bg-cold-ice hover:text-cold-on-accent font-semibold text-xs transition-all shrink-0"
                     >
                       <span>Telemetría</span>
                       <ExternalLink className="w-3 h-3" />

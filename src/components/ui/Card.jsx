@@ -27,7 +27,7 @@ export function CardTitle({ children, className, ...props }) {
   return (
     <h3
       className={cn(
-        'font-heading text-sm font-semibold tracking-wider uppercase text-[#BECFFF] flex items-center gap-2',
+        'font-heading text-sm font-semibold tracking-wider uppercase text-cold-ice flex items-center gap-2',
         className
       )}
       {...props}
@@ -39,7 +39,7 @@ export function CardTitle({ children, className, ...props }) {
 
 export function CardDescription({ children, className, ...props }) {
   return (
-    <p className={cn('text-xs text-[#9CA3AF]', className)} {...props}>
+    <p className={cn('text-xs text-cold-muted', className)} {...props}>
       {children}
     </p>
   )

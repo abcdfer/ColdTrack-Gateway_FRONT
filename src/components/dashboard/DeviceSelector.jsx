@@ -11,16 +11,16 @@ export function DeviceSelector({
 }) {
   if (!devices || devices.length === 0) {
     return (
-      <Card className="border-dashed border-[#A296BC]/30 py-6 text-center">
+      <Card className="border-dashed border-cold-lavender/30 py-6 text-center">
         <div className="flex flex-col items-center justify-center gap-3">
-          <div className="p-3 rounded-full bg-[#A296BC]/10 border border-[#A296BC]/20 text-[#A296BC]">
+          <div className="p-3 rounded-full bg-cold-lavender/10 border border-cold-lavender/20 text-cold-lavender">
             <Server className="w-6 h-6" />
           </div>
           <div>
-            <h4 className="font-heading font-semibold text-sm text-[#F3F4F6]">
+            <h4 className="font-heading font-semibold text-sm text-cold-text">
               Sin Equipos Detectados
             </h4>
-            <p className="text-xs text-[#9CA3AF] max-w-sm mt-1">
+            <p className="text-xs text-cold-muted max-w-sm mt-1">
               Inicia la simulación en Tinkercad o inyecta una lectura de prueba para inicializar un dispositivo ColdTrack.
             </p>
           </div>
@@ -34,8 +34,8 @@ export function DeviceSelector({
 
   return (
     <div className="flex items-center gap-2 overflow-x-auto custom-scrollbar pb-1">
-      <div className="flex items-center gap-2 text-xs font-semibold text-[#A296BC] uppercase tracking-wider pr-2 border-r border-white/10 shrink-0">
-        <Radio className="w-3.5 h-3.5 text-[#BECFFF] animate-pulse" />
+      <div className="flex items-center gap-2 text-xs font-semibold text-cold-lavender uppercase tracking-wider pr-2 border-r border-cold-divider/10 shrink-0">
+        <Radio className="w-3.5 h-3.5 text-cold-ice animate-pulse" />
         Equipos ({devices.length}):
       </div>
 
@@ -50,8 +50,8 @@ export function DeviceSelector({
             onClick={() => onSelectDevice(device.deviceId)}
             className={`flex items-center gap-3 px-3.5 py-2 rounded-xl text-left transition-all duration-200 cursor-pointer shrink-0 border ${
               isSelected
-                ? 'bg-[#BECFFF]/15 border-[#BECFFF]/40 shadow-[0_0_15px_rgba(190,207,255,0.15)] text-[#F3F4F6]'
-                : 'glass-panel text-[#9CA3AF] hover:border-[#BECFFF]/25 hover:text-[#F3F4F6]'
+                ? 'bg-cold-ice/15 border-cold-ice/40 shadow-[0_0_15px_rgba(190,207,255,0.15)] text-cold-text'
+                : 'glass-panel text-cold-muted hover:border-cold-ice/25 hover:text-cold-text'
             }`}
           >
             <div className="flex items-center gap-2">

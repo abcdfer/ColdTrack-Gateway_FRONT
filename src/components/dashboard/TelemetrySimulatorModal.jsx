@@ -59,12 +59,12 @@ export function TelemetrySimulatorModal({ isOpen, onClose, onInject }) {
               {label}
               <input type="number" step="0.1" min={min} max={max} required disabled={pending}
                 value={values[key]} onChange={(event) => setValues({ ...values, [key]: event.target.value })}
-                className="w-full rounded-lg border border-white/20 bg-zinc-950 p-2 text-white" />
+                className="w-full rounded-lg border border-cold-divider/20 bg-zinc-950 p-2 text-cold-text" />
             </label>
           ))}
         </div>
         {feedback && <p role={feedback.error ? 'alert' : 'status'}
-          className={feedback.error ? 'text-rose-300' : 'text-[#BECFFF]'}>{feedback.message}</p>}
+          className={feedback.error ? 'text-rose-300' : 'text-cold-ice'}>{feedback.message}</p>}
         <div className="flex justify-end gap-2">
           <Button type="button" variant="ghost" onClick={onClose}>Cerrar</Button>
           <Button type="submit" disabled={pending}>{pending ? 'Enviando…' : 'Enviar lectura'}</Button>
