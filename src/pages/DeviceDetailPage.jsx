@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import {
   ArrowLeft,
   Radio,
@@ -54,13 +55,13 @@ export function DeviceDetailPage({
           <p className="text-xs text-cold-muted">
             Regresa a la pantalla principal para seleccionar un equipo de la flota.
           </p>
-          <a
-            href="/"
+          <Link
+            to="/"
             className="inline-flex items-center gap-2 py-2 px-4 rounded-lg bg-cold-ice text-cold-on-accent font-semibold text-xs"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             Volver a la Flota
-          </a>
+          </Link>
         </div>
       </Card>
     )
@@ -70,13 +71,13 @@ export function DeviceDetailPage({
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-3 border-b border-cold-divider/10">
         <div className="flex items-center gap-3 flex-wrap">
-          <a
-            href="/"
+          <Link
+            to="/"
             className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-cold-divider/10 text-xs text-cold-muted hover:text-cold-ice hover:border-cold-ice/40 transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Flota</span>
-          </a>
+          </Link>
 
           <div>
             <div className="flex items-center gap-2 flex-wrap">
@@ -85,20 +86,20 @@ export function DeviceDetailPage({
                 {deviceId}
               </h2>
               <div className="flex items-center gap-1 bg-cold-shade/40 px-1 py-0.5 rounded-lg border border-cold-divider/10">
-                <a
-                  href={`?device=${encodeURIComponent(prevDeviceId)}`}
+                <Link
+                  to={`?device=${encodeURIComponent(prevDeviceId)}`}
                   className="p-1 rounded hover:text-cold-ice hover:bg-cold-divider/10 text-cold-muted transition-colors"
                   title={`Anterior: ${prevDeviceId}`}
                 >
                   <ChevronLeft className="w-3.5 h-3.5" />
-                </a>
-                <a
-                  href={`?device=${encodeURIComponent(nextDeviceId)}`}
+                </Link>
+                <Link
+                  to={`?device=${encodeURIComponent(nextDeviceId)}`}
                   className="p-1 rounded hover:text-cold-ice hover:bg-cold-divider/10 text-cold-muted transition-colors"
                   title={`Siguiente: ${nextDeviceId}`}
                 >
                   <ChevronRight className="w-3.5 h-3.5" />
-                </a>
+                </Link>
               </div>
 
               <Badge variant={isOnline ? 'success' : 'default'} className="text-[10px]">
