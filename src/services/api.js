@@ -15,7 +15,7 @@ async function apiRequest(path, options = {}) {
     const data = await response.json().catch(() => ({}))
     throw new Error(data.error || `HTTP ${response.status}`)
   }
-  return response.json()
+  return response.status === 204 ? undefined : response.json()
 }
 
 export const getSession = (signal) => apiRequest('/api/session', { signal })
@@ -39,3 +39,17 @@ export const sendTelemetry = (payload) => apiRequest('/api/simulator/readings', 
   method: 'POST',
   body: JSON.stringify(payload),
 })
+
+const sendJson = (path, method, data) => apiRequest(path, { method, body: JSON.stringify(data) })
+const devicePolicyPath = (id) => '/api/devices/' + encodeURIComponent(id) + '/policy'
+
+export const registerAccount = (data) => sendJson('/api/registration', 'POST', data)
+export const verifyAccount = (data) => sendJson('/api/registration/verify', 'POST', data)
+export const createDevice = (data) => sendJson('/api/devices', 'POST', data)
+export const fetchPolicy = (id) => apiRequest(devicePolicyPath(id))
+export const updatePolicy = (id, data) => sendJson(devicePolicyPath(id), 'PATCH', data)
+export const fetchTechnicians = () => apiRequest('/api/technicians')
+export const fetchContacts = () => apiRequest('/api/technician-contacts')
+export const saveContact = (id) => apiRequest('/api/technician-contacts/' + encodeURIComponent(id), { method: 'PUT' })
+export const fetchReviews = () => apiRequest('/api/reviews')
+export const createReview = (data) => sendJson('/api/reviews', 'POST', data)

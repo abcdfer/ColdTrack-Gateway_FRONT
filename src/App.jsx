@@ -11,9 +11,11 @@ import { DeviceDetailPage } from './pages/DeviceDetailPage'
 import { TelemetrySimulatorModal } from './components/dashboard/TelemetrySimulatorModal'
 import { SystemInfoModal } from './components/dashboard/SystemInfoModal'
 import { UnderConstructionModal } from './components/ui/UnderConstructionModal'
+import { useAuthStore } from './store/useAuthStore'
 import { Button } from './components/ui/Button'
 
 export default function App() {
+  const registered = useAuthStore((state) => Boolean(state.session?.account))
   const [params] = useSearchParams()
   const activeDeviceFromUrl = params.get('device') || null
 
@@ -149,6 +151,7 @@ export default function App() {
       <TelemetrySimulatorModal
         isOpen={isSimulatorOpen}
         onClose={() => setIsSimulatorOpen(false)}
+        deviceId={registered ? activeDeviceFromUrl || devices[0]?.deviceId : 'SIM-001'}
         onInject={injectTelemetry}
       />
 

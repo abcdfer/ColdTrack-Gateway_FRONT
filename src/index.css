@@ -128,3 +128,33 @@ h1, h2, h3, h4, h5, h6 {
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: color-mix(in srgb, var(--color-cold-ice) 45%, transparent);
 }
+
+.operations-form {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.operations-form fieldset {
+  display: grid;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.operations-form legend {
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+
+.operations-form label:not(:has(input[type="checkbox"])) {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.operations-form :is(input:not([type="checkbox"]), select, textarea) {
+  width: 100%;
+  border: 1px solid color-mix(in srgb, currentColor 25%, transparent);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  background: var(--color-cold-dark);
+  color: var(--color-cold-text);
+}

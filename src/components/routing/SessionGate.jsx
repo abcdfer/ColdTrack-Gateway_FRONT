@@ -1,3 +1,4 @@
+import { Link, useSearchParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { ThemeToggle } from '@/components/common/ThemeToggle'
 import { Button } from '@/components/ui/Button'
@@ -8,6 +9,8 @@ import { useAuthStore } from '@/store/useAuthStore'
 export function SessionGate({ children }) {
   const session = useAuthStore((state) => state.session)
   const setSession = useAuthStore((state) => state.setSession)
+  const [params] = useSearchParams()
+  const operations = params.get('section') === 'operations'
   const [error, setError] = useState('')
   const [pending, setPending] = useState(false)
 
@@ -58,6 +61,12 @@ export function SessionGate({ children }) {
     <>
       <div className="flex flex-wrap items-center justify-end gap-3 bg-cold-dark px-5 pt-3">
         {error && <p role="alert" className="text-sm text-rose-300">{error}</p>}
+        {session.account?.role === 'owner' && (
+          <Link className="rounded-md px-3 py-2 text-sm font-semibold text-cold-text underline"
+            to={operations ? '/' : '/?section=operations'}>
+            {operations ? 'Dashboard' : 'Operaciones'}
+          </Link>
+        )}
         <ThemeToggle />
         {session.required && <Button variant="outline" size="sm" disabled={pending} onClick={endSession}>Cerrar sesión</Button>}
       </div>
