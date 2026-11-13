@@ -1,7 +1,16 @@
 import { Link } from 'react-router-dom'
-import { ExternalLink, Filter, Download, Clock, Thermometer, AlertCircle, CheckCircle2, Truck } from 'lucide-react'
+import {
+  ExternalLink,
+  Filter,
+  Clock,
+  Truck,
+  PlusCircle,
+  AlertCircle,
+  CheckCircle2,
+} from 'lucide-react'
 import { Card } from '../ui/Card'
 import { Badge } from '../ui/Badge'
+import { Button } from '../ui/Button'
 
 function formatUptime(uptimeMs) {
   if (!uptimeMs && uptimeMs !== 0) return '00:00:00'
@@ -17,6 +26,7 @@ export function FleetDeviceList({
   latestDataMap = {},
   searchTerm = '',
   onOpenSimulator,
+  onOpenAddDevice,
 }) {
   const filtered = devices.filter((dev) => {
     if (!searchTerm) return true
@@ -43,34 +53,38 @@ export function FleetDeviceList({
           </div>
 
           <div className="flex items-center gap-2 text-xs">
-            <button
-              onClick={onOpenSimulator}
-              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-cold-divider/10 text-cold-muted hover:text-cold-ice hover:border-cold-ice/30 transition-all cursor-pointer"
-            >
-              <Filter className="w-3 h-3" />
-              <span>Filtrar</span>
-            </button>
+            {onOpenAddDevice && (
+              <Button size="sm" variant="outline" onClick={onOpenAddDevice}>
+                <PlusCircle className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">Nuevo</span>
+              </Button>
+            )}
           </div>
         </div>
 
         {filtered.length === 0 ? (
-          <div className="text-center py-12">
-            <Truck className="w-8 h-8 text-cold-lavender mx-auto mb-2" />
+          <div className="text-center py-12 space-y-3">
+            <Truck className="w-10 h-10 text-cold-lavender mx-auto opacity-60" />
             <p className="text-xs text-cold-muted">
-              No se encontraron dispositivos registrados.
+              No se encontraron dispositivos registrados en tu cuenta.
             </p>
-            <button
-              onClick={onOpenSimulator}
-              className="mt-3 px-3 py-1.5 rounded-lg bg-cold-ice text-cold-on-accent font-semibold text-xs cursor-pointer shadow-sm"
-            >
-              Inyectar Telemetría Inicial
-            </button>
+            <div className="flex items-center justify-center gap-2">
+              {onOpenAddDevice && (
+                <Button size="sm" variant="primary" onClick={onOpenAddDevice}>
+                  <PlusCircle className="w-3.5 h-3.5" />
+                  Registrar Primer Equipo
+                </Button>
+              )}
+              <Button size="sm" variant="outline" onClick={onOpenSimulator}>
+                Simulador IoT
+              </Button>
+            </div>
           </div>
         ) : (
           <div className="space-y-3">
             {filtered.map((device) => {
               const latest = latestDataMap[device.deviceId]
-              const isOnline = device.status === 'online'
+              const isOnline = device.status === 'online' || Boolean(latest?.receivedAt)
               const diagnostico =
                 latest?.diagnostico || device.diagnostico || 'SIN_FALLAS'
               const estado = latest?.estado || device.estado || 'NORMAL'
@@ -91,21 +105,26 @@ export function FleetDeviceList({
                     <div>
                       <div className="flex items-center gap-2">
                         <span className="font-heading font-bold text-sm text-cold-text">
-                          {device.deviceId}
+                          {device.name || device.deviceId}
                         </span>
                         <span
                           className={`w-2 h-2 rounded-full ${
                             isOnline ? 'bg-emerald-400 animate-pulse' : 'bg-zinc-600'
                           }`}
+                          title={isOnline ? 'En línea' : 'Desconectado'}
                         />
                       </div>
                       <div className="flex items-center gap-2 text-[11px] text-cold-lavender mt-0.5">
-                        <span className="flex items-center gap-1">
-                          <Clock className="w-3 h-3" />
-                          Recorrido: {formatUptime(uptimeMs)}
+                        <span className="font-mono text-[10px] text-cold-muted">
+                          {device.deviceId}
                         </span>
                         <span>·</span>
-                        <span>{estado}</span>
+                        <span className="flex items-center gap-1">
+                          <Clock className="w-3 h-3" />
+                          Uptime: {formatUptime(uptimeMs)}
+                        </span>
+                        <span>·</span>
+                        <span className="uppercase text-[10px]">{estado}</span>
                       </div>
                     </div>
                   </div>
@@ -132,8 +151,6 @@ export function FleetDeviceList({
 
                     <Link
                       to={`?device=${encodeURIComponent(device.deviceId)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-lg bg-cold-ice/10 text-cold-ice border border-cold-ice/30 hover:bg-cold-ice hover:text-cold-on-accent font-semibold text-xs transition-all shrink-0"
                     >
                       <span>Telemetría</span>

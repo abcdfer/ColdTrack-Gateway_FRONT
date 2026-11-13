@@ -7,8 +7,16 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
     proxy: {
-      '/api': 'http://127.0.0.1:5000',
-      '/health': 'http://127.0.0.1:5000',
+      '/api': {
+        target: process.env.VITE_BACKEND_URL || 'https://abcdfer.pythonanywhere.com',
+        changeOrigin: true,
+        secure: false,
+      },
+      '/health': {
+        target: process.env.VITE_BACKEND_URL || 'https://abcdfer.pythonanywhere.com',
+        changeOrigin: true,
+        secure: false,
+      },
     },
   },
   test: {

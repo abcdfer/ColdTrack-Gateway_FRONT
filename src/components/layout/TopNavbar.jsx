@@ -1,4 +1,15 @@
-import { Search, Bell, Plus, Radio, AlertTriangle, CheckCircle2, RefreshCw, Activity } from 'lucide-react'
+import {
+  Search,
+  Bell,
+  Plus,
+  Radio,
+  AlertTriangle,
+  CheckCircle2,
+  RefreshCw,
+  Activity,
+  User,
+  Bot,
+} from 'lucide-react'
 import { Button } from '../ui/Button'
 import { Badge } from '../ui/Badge'
 
@@ -8,6 +19,9 @@ export function TopNavbar({
   searchTerm = '',
   setSearchTerm,
   onOpenSimulator,
+  onOpenProfile,
+  onOpenAssistant,
+  onOpenAlerts,
   onRefresh,
   isConnected,
   isAutoRefresh,
@@ -28,13 +42,11 @@ export function TopNavbar({
           </h2>
           <Activity className="w-5 h-5 text-cold-ice animate-pulse" />
         </div>
-        <p className="text-xs text-cold-lavender mt-0.5">
-          {subtitle}
-        </p>
+        <p className="text-xs text-cold-lavender mt-0.5">{subtitle}</p>
       </div>
 
-      <div className="flex items-center gap-3 flex-wrap">
-        <div className="relative flex-1 md:w-64">
+      <div className="flex items-center gap-2.5 flex-wrap">
+        <div className="relative flex-1 md:w-56">
           <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-cold-muted" />
           <input
             type="text"
@@ -45,15 +57,36 @@ export function TopNavbar({
           />
         </div>
 
+        {onOpenAssistant && (
+          <button
+            onClick={onOpenAssistant}
+            title="Asistente Virtual IA"
+            className="p-2.5 rounded-xl glass-panel text-cold-ice hover:bg-cold-ice/15 hover:border-cold-ice/40 transition-all cursor-pointer"
+          >
+            <Bot className="w-4 h-4" />
+          </button>
+        )}
+
         <button
-          onClick={onRefresh}
+          onClick={onOpenAlerts || onRefresh}
+          title="Alertas activas"
           className="relative p-2.5 rounded-xl glass-panel text-cold-muted hover:text-cold-ice hover:border-cold-ice/30 transition-all cursor-pointer"
         >
           <Bell className="w-4 h-4" />
           {alertCount > 0 && (
-            <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-rose-500 animate-ping" />
+            <span className="absolute top-1 right-1 w-2.5 h-2.5 rounded-full bg-rose-500 ring-2 ring-cold-dark animate-pulse" />
           )}
         </button>
+
+        {onOpenProfile && (
+          <button
+            onClick={onOpenProfile}
+            title="Mi Perfil"
+            className="p-2.5 rounded-xl glass-panel text-cold-muted hover:text-cold-ice hover:border-cold-ice/30 transition-all cursor-pointer"
+          >
+            <User className="w-4 h-4" />
+          </button>
+        )}
 
         <Button
           variant="outline"
@@ -95,9 +128,10 @@ export function TopNavbar({
           className="shadow-sm"
         >
           <Plus className="w-4 h-4" />
-          <span>Inyectar Telemetría</span>
+          <span>Simulador</span>
         </Button>
       </div>
     </header>
   )
 }
+export default TopNavbar
